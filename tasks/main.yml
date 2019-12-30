@@ -2,10 +2,16 @@
 # tasks file for ferhaty.jenkins-slave
 
 - name: Creates directory
-  win_file: path=c:/jenkins state=directory
+  win_file:
+    path: c:/jenkins
+    state: directory
 
 - name: download swarm client
-  win_get_url: url=http://maven.jenkins-ci.org/content/repositories/releases/org/jenkins-ci/plugins/swarm-client/{{ swarm_client_version }}/swarm-client-{{ swarm_client_version }}-jar-with-dependencies.jar dest=c:/jenkins/swarm-client.jar
+  win_get_url:
+    # yamllint disable-line rule:line-length
+    url: "{{ swarm_base }}/{{ swarm_client_version }}/swarm-client-{{ swarm_client_version }}-jar-with-dependencies.jar"
+    dest: c:/jenkins/swarm-client.jar
 
 - name: run swarm client
+  # yamllint disable-line rule:line-length
   script: run_swarm_client.ps1 "{{ swarm_executors }}" "{{ swarm_master }}" "{{ inventory_hostname }}"

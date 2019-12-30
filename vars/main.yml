@@ -1,5 +1,6 @@
 ---
 # vars file for ferhaty.jenkins-slave
 
-swarm_client_version: '1.22'
-swarm_executors: 4
+swarm_site: http://maven.jenkins-ci.org
+swarm_dir: '/content/repositories/releases/org/jenkins-ci/plugins/swarm-client/'
+swarm_base: "{{ swarm_site }}{{ swarm_dir }}"
